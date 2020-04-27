@@ -15,16 +15,18 @@ namespace Day_at_the_Races
 
         Guy[] NewGuy = new Guy[3];
         Greyhound[] Dog = new Greyhound[4];
+        Random randomizer;
         public int WinningDog;
-        Random Randomizer = new Random();
 
         public Form1()
         {
+            
             InitializeComponent();
             SetupRaceTrack();
         }
         private void SetupRaceTrack()
         {
+            randomizer = new Random();
             Dog[0] = new Greyhound
             {
                 Name = "Toby",
@@ -32,7 +34,7 @@ namespace Day_at_the_Races
                 MyPictureBox = PictureBox1,
                 StartingPosition = PictureBox1.Left,
                 RacetrackLength = racetrackPictureBox.Width - PictureBox1.Width,
-                //Randomizer MyRandomizer 
+                Randomizer = randomizer 
             };
             Dog[1] = new Greyhound
                 {
@@ -41,8 +43,8 @@ namespace Day_at_the_Races
                     MyPictureBox = PictureBox2,
                     StartingPosition = PictureBox2.Left,
                     RacetrackLength = racetrackPictureBox.Width - PictureBox2.Width,
-                   // Randomizer = MyRandomizer
-                };
+                    Randomizer = randomizer
+            };
             Dog[2] = new Greyhound
             {
                 Name = "Happy",
@@ -50,7 +52,7 @@ namespace Day_at_the_Races
                 MyPictureBox = PictureBox3,
                 StartingPosition = PictureBox3.Left,
                 RacetrackLength = racetrackPictureBox.Width - PictureBox3.Width,
-               // Randomizer = MyRandomizer
+                Randomizer = randomizer
             };
             Dog[3] = new Greyhound
             {
@@ -59,7 +61,7 @@ namespace Day_at_the_Races
                 MyPictureBox = PictureBox4,
                 StartingPosition = PictureBox4.Left,
                 RacetrackLength = racetrackPictureBox.Width - PictureBox4.Width,
-                // Randomizer = MyRandomizer
+                Randomizer = randomizer
             };
             
             label3.Text = Dog[0].Name + ", dog " + Dog[0].DogNummer;
@@ -156,8 +158,7 @@ namespace Day_at_the_Races
                 {
                     timer1.Stop();
                     timer1.Enabled = false;
-                   
-
+                            
                     MessageBox.Show(Dog[i].Name + " has won the race");
                     WinningDog = Dog[i].DogNummer;
                     BettingParlor.Enabled = true;

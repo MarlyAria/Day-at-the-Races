@@ -14,7 +14,7 @@ namespace Day_at_the_Races
         public int RacetrackLength;             //how long my racetrack is
         public PictureBox MyPictureBox = null;  //my picturebox object
         public int Location = 0;                //my location on the racetrack
-        public Random Randomizer;               //and instance of Random
+        public Random Randomizer;               //an instance of Random
         public String Name;
         public int DogNummer;
 
@@ -37,6 +37,8 @@ namespace Day_at_the_Races
             {
                 return false; // finish line not crossed
             }
+
+           
         }
 
         public void TakeStartingPosition()
