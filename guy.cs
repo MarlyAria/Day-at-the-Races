@@ -16,6 +16,7 @@ namespace Day_at_the_Races
         public bool BetPlaced = false;
         public RadioButton MyRadioButton;
         public Label MyLabel;
+        public bool PermissionToStart = false;
 
 
         public void UpdateLabels()
@@ -32,6 +33,7 @@ namespace Day_at_the_Races
                 BetPlaced = true;
                 //this way the game can continue even if some can't bet anymore
             }
+           
         }
 
         public void ClearBet()

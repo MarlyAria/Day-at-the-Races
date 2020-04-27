@@ -17,6 +17,7 @@ namespace Day_at_the_Races
         Greyhound[] Dog = new Greyhound[4];
         Random randomizer;
         public int WinningDog;
+              
 
         public Form1()
         {
@@ -132,19 +133,40 @@ namespace Day_at_the_Races
             NameLabel.Text = NewGuy[2].Name;
         }
 
+        private void PermissionCheck()
+        {
+            foreach (Guy guy in NewGuy)
+            {
+                if (guy.BetPlaced == false)
+                {
+                    MessageBox.Show("Please make sure everybody has placed their bets!");
+                    break;
+                }
+                else
+                {
+                    guy.PermissionToStart = true;
+                }
+            }
+        }
+        
         private void RaceButton_Click(object sender, EventArgs e)
         {
-           
-            Dog[0].TakeStartingPosition();
-            Dog[1].TakeStartingPosition();
-            Dog[2].TakeStartingPosition();
-            Dog[3].TakeStartingPosition();
+            PermissionCheck();
             
-            
-            BettingParlor.Enabled = false;
-            timer1.Start();
+            if (NewGuy[0].PermissionToStart == true && NewGuy[1].PermissionToStart == true 
+                   && NewGuy[2].PermissionToStart == true )
+                {
+                        Dog[0].TakeStartingPosition();
+                        Dog[1].TakeStartingPosition();
+                        Dog[2].TakeStartingPosition();
+                        Dog[3].TakeStartingPosition();
 
-            
+
+                        BettingParlor.Enabled = false;
+                        timer1.Start();
+                }
+
+                       
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -152,24 +174,30 @@ namespace Day_at_the_Races
             //de timer zorgt eervoor dat de hondjes daadwerkelijk gaan lopen
             for (int i = 0; i < Dog.Length; i++)
             {
-
-                Dog[i].Run();
-                if (Dog[i].Run() == true)
+                foreach (Greyhound greyhound in Dog)
                 {
-                    timer1.Stop();
-                    timer1.Enabled = false;
-                            
-                    MessageBox.Show(Dog[i].Name + " has won the race");
-                    WinningDog = Dog[i].DogNummer;
-                    BettingParlor.Enabled = true;
-                    
-                    foreach (Guy guy in NewGuy)
+
+                
+                Dog[i].Run();
+                    if (Dog[i].Run() == true)
                     {
-                        guy.Collect(WinningDog);
-                    }
-                    
-                    
+                        timer1.Stop();
+                        timer1.Enabled = false;
+
+                        MessageBox.Show(Dog[i].Name + " has won the race");
+                        WinningDog = Dog[i].DogNummer;
+                        BettingParlor.Enabled = true;
+
+                        foreach (Guy guy in NewGuy)
+                        {
+                            guy.Collect(WinningDog);
+                        }
+
+                    }   
                 }
+
+            
+
             }
         }
     }
